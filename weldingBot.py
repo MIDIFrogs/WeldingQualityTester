@@ -73,7 +73,7 @@ def createAnswer(records):
     return msg
 
 def createBoxedPhoto(image, records):
-  return drawBox.plot_bboxes(image, [k['hitbox'] + [k['confidence'], k['class']] for k in records], labels=classNames, colors=[], score=True, conf=None)
+  return drawBox.plot_bboxes(image, [k['hitbox'] + [k['confidence'], k['class']] for k in records], labels=classNames, colors=[(139,0,255), (241,156,187), (125,176,142), (255,253,10), (74,255,10)], score=True, conf=None)
 
 # Bot section
 
@@ -95,15 +95,13 @@ def OnPhotoRecieve(message):
     Args:
         'message': Telegram message with image for the bot. 
     '''
-    bot.send_message(message.chat.id, 'чудик обработал')
+    bot.send_chat_action(message.chat.id, 'typing')
     photo = message.photo[-1]
     file_info = bot.get_file(photo.file_id)
     downloaded_file = bot.download_file(file_info.file_path)
     image = Image.open(io.BytesIO(downloaded_file))
     nparr = np.array(image)
     records = proccesImage(nparr)
-    text = createAnswer(records)
-    bot.send_message(message.chat.id, text)
     if len(records) != 0:
         image = createBoxedPhoto(nparr, records)
         image = Image.fromarray(image)
@@ -112,6 +110,8 @@ def OnPhotoRecieve(message):
         image.save(bytes, format="JPEG")
         bytes.seek(0)
         bot.send_photo(message.chat.id, photo=bytes)
+    text = createAnswer(records)
+    bot.send_message(message.chat.id, text)
 
 @bot.message_handler(content_types=['text', 'sticker', 'video' 'voice'])
 def OnWrongContentType(message):

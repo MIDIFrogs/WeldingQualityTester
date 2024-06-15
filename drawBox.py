@@ -1,5 +1,4 @@
 import cv2
-#from google.colab.patches import cv2_imshow
 
 def box_label(image, box, label='', color=(128, 128, 128), txt_color=(255, 255, 255)):
   '''Adds a label to the provided box.
@@ -10,7 +9,7 @@ def box_label(image, box, label='', color=(128, 128, 128), txt_color=(255, 255, 
     'color' (tuple(int, int, int)): Color of the outline
     'txt_color' (tuple(int, int, int)): Color of the label
   '''
-  lw = max(round(sum(image.shape) / 2 * 0.003), 2)
+  lw = max(round(sum(image.shape)/2* 0.003), 2)
   p1, p2 = (int(box[0]), int(box[1])), (int(box[2]), int(box[3]))
   cv2.rectangle(image, p1, p2, color, lw, cv2.LINE_AA)
   if label:
@@ -43,7 +42,7 @@ def plot_bboxes(image, boxes, labels=[], colors=[], score=True, conf=None):
     labels = {0: u'adj', 1: u'int', 2: u'geo',3: u'pro', 4: u'non'}
   #Define colors
   if colors == []:
-    colors = [(89, 161, 197),(67, 161, 255),(19, 222, 24),(186, 55, 2),(167, 146, 11)]
+    colors = [(139,0,255),(67, 161, 255),(19, 222, 24),(186, 55, 2),(167, 146, 11)]
   
   #plot each boxes
   for box in boxes:
@@ -62,7 +61,5 @@ def plot_bboxes(image, boxes, labels=[], colors=[], score=True, conf=None):
       box_label(image, box, label, color)
 
   return image
-
-#path=r'1.jpg'
-#image=cv2.imread(path) 
+ 
 
