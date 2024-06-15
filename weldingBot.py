@@ -159,7 +159,7 @@ def OnFileRecieve(message):
         bot.send_message(message.chat.id, text)
 
     else:
-        bot.send.message(message.chat.id, localization["WrongTypeMessage"])
+        bot.send_message(message.chat.id, localization["WrongTypeMessage"])
 
 # Startup the bot
 bot.polling(none_stop = True)
