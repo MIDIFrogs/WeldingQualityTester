@@ -16,7 +16,7 @@ if (os.path.exists("startup.config")):
     with open("startup.config") as configFile:
         keys = configFile.readlines()
         for line in keys:
-            key, value = map(lambda x: x.trim(), line.split("="))
+            key, value = map(lambda x: x.strip(), line.split("="))
             config[key] = value
 
 localization = yaml.load(open(f'Resources/Localization/{config.get("Locale", "ru")}.yaml', encoding="UTF-8"), Loader=yaml.CFullLoader)
@@ -77,7 +77,7 @@ def createBoxedPhoto(image, records):
 
 # Bot section
 
-TOKEN = open("Resources/token.dat").readline()
+TOKEN = config.get("Token", os.environ.get("Token"))
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start'])
