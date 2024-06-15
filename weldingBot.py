@@ -73,7 +73,15 @@ def createAnswer(records):
     return msg
 
 def createBoxedPhoto(image, records):
-  return drawBox.plot_bboxes(image, [k['hitbox'] + [k['confidence'], k['class']] for k in records], labels=classNames, colors=[(139,0,255), (241,156,187), (125,176,142), (255,253,10), (74,255,10)], score=True, conf=None)
+  transformed = []
+  for record in records:
+      x, y, w, h = record['hitbox']
+      x1 = x - w // 2
+      x2 = x + w // 2
+      y1 = y - h // 2
+      y2 = y + h // 2
+      transformed.append([x1, y1, x2, y2, record['confidence'], record['class']])
+  return drawBox.plot_bboxes(image, transformed, labels=classNames, colors=[(139,0,255), (241,156,187), (125,176,142), (255,253,10), (74,255,10)], score=True, conf=None)
 
 # Bot section
 
