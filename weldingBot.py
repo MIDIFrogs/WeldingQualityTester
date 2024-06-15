@@ -132,5 +132,34 @@ def OnWrongContentType(message):
     bot.send_message(message.chat.id, localization["WrongTypeMessage"])
     bot.send_sticker(message.chat.id, sticker)
 
+@bot.message_handler(content_types=['document'])
+def OnFileRecieve(message):
+    '''Handles any wrong data types receiving.
+
+    Args:
+        'message': Telegram message with any content instead of photos.
+    '''
+    bot.send_chat_action(message.chat.id, 'typing')
+    file = message.document
+    if file.file_name.endswith('.jpg') or file.file_name.endswith('.jpeg'):
+        file_info = bot.get_file(file.file_id)
+        downloaded_file = bot.download_file(file_info.file_path)
+        image = Image.open(io.BytesIO(downloaded_file))
+        nparr = np.array(image)
+        records = proccesImage(nparr)
+        if len(records) != 0:
+            image = createBoxedPhoto(nparr, records)
+            image = Image.fromarray(image)
+            bytes = io.BytesIO()
+            bytes.name = 'image.jpeg'
+            image.save(bytes, format="JPEG")
+            bytes.seek(0)
+            bot.send_photo(message.chat.id, photo=bytes)
+        text = createAnswer(records)
+        bot.send_message(message.chat.id, text)
+
+    else:
+        bot.send.message(message.chat.id, localization["WrongTypeMessage"])
+
 # Startup the bot
 bot.polling(none_stop = True)
