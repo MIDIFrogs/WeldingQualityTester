@@ -9,15 +9,15 @@ by [PerdoTeam [MIDIFrogs]](https://github.com/MIDIFrogs)
 ## Features
 - ✅ Simple to setup and use
 - 🧩 Extensible
-- 🪶 lightweight
+- 🌬️ lightweight
 
 ### Prerequisites:
 - Installed Python v3.10+
-- [Ultralytics](https://github.com/ultralytics/ultralytics) library
+- [Ultralytics](https://github.com/ultralytics/ultralytics) library (can be downloaded from requirements)
 
 ## Getting started
 1. Open the terminal in repo directory
-2. Run `pip install requirements.txt`
+2. Run `pip install -r requirements.txt`
 
 ### CSV dataset processing
 3. Run `python csvRunner.py`
