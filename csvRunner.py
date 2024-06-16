@@ -1,8 +1,9 @@
 from ultralytics import YOLO
 import os
-from pathlib import Path
 
 def ProcessCsv():
+    '''Processes the dataset and gets the CSV with processing results.
+    '''
     path = input("Input dataset path: ").replace('"', "")
     jpgFiles = [file for file in os.listdir(path) if file.endswith(".jpg")]
 

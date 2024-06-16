@@ -1,7 +1,6 @@
 import drawBox
 from PIL import Image
 import numpy as np
-from io import BytesIO
 
 path = input("Input project path: ")
 labels = ["Adjacency", "Intergity", "Geometry", "Postprocessing", "Incompletion"]

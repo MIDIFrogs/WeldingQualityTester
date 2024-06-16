@@ -4,3 +4,4 @@ LabelsInvariant: ["Adjacency", "Intergity", "Geometry", "Postprocessing", "Incom
 LabelsLocalized: ["Adjacency defects", "Intergity defects", "Geometry defects", "Postprocessing defects", "Incompletion defects"]
 HelloMessage: "Hello, only today you have an unique opportunity to send a photo of the welding seam and get quality test result. Send it, lets go"
 WrongTypeMessage: "Unfortunately, this is not the one I need. I've asked you for an image, not any other kind of message. Please, write me the right one."
+UnexpectedErrorMessage: "An unexpected error occured. Please try again or use another image."
